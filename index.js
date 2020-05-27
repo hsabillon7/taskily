@@ -3,6 +3,16 @@ const express = require("express");
 // Importar todas las rutas disponibles
 const routes = require("./routes");
 
+// Crear la conexión con la base de datos
+const db = require("./config/db");
+
+// Realizar la conexión a la base de datos
+// Sequelize se conecta mediante promises
+// https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Promise
+db.sync()
+  .then(() => console.log("Conectado con el servidor de BD"))
+  .catch((error) => console.log(error));
+
 // Crear un servidor de express
 const app = express();
 
