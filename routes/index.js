@@ -14,5 +14,7 @@ module.exports = function () {
 
   routes.post("/nuevo_proyecto", proyectosController.nuevoProyecto);
 
+  routes.get("/home_proyecto", proyectosController.proyectosHome);
+
   return routes;
 };
