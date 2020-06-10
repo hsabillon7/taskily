@@ -7,25 +7,66 @@ exports.home = (req, res, next) => {
 };
 
 // Permite la creación de un nuevo proyecto
-exports.nuevoProyecto = (req, res, next) => {
+// La conexión para almacenar en la base de datos es asíncrona (async / await)
+exports.nuevoProyecto = async (req, res, next) => {
   // Validar que el input del formulario tenga valor
   // Para acceder a los valores y asignarlos en un solo paso
   // vamos a utilizar destructuring.
   const { nombre } = req.body;
-  const errores = [];
+  const mensajes = [];
 
   // Verificar si el nombre del proyecto tiene un valor
   if (!nombre) {
-    errores.push({ error: "El nombre del proyecto no puede ser vacío." });
+    mensajes.push({
+      error: "El nombre del proyecto no puede ser vacío.",
+      type: "alert-danger",
+    });
   }
 
   // Si hay errores
-  if (errores.length) {
+  if (mensajes.length) {
     res.render("crear_proyecto", {
-      errores,
+      mensajes,
     });
   } else {
-    // Insertar el proyecto a la base de datos
-    res.send("Insertado en la BD");
+    try {
+      // Insertar el proyecto a la base de datos
+      await Proyecto.create({ nombre });
+
+      mensajes.push({
+        error: "Proyecto almacenado satisfactoriamente.",
+        type: "alert-success",
+      });
+
+      res.render("crear_proyecto", {
+        mensajes,
+      });
+    } catch (error) {
+      mensajes.push({
+        error:
+          "Ha ocurrido un error interno en el servidor. Comunicate con el personal de Taskily.",
+        type: "alert-warning",
+      });
+    }
+  }
+};
+
+// Obtener todos los proyectos
+exports.proyectosHome = async (req, res, next) => {
+  const mensajes = [];
+
+  try {
+    const proyectos = await Proyecto.findAll();
+    console.log(proyectos);
+
+    res.render("home_proyecto", { proyectos });
+  } catch (error) {
+    // Crear el mensaje de error
+    mensajes.push({
+      error: "Error al obtener los proyectos. Favor reintentar.",
+      type: "alert-warning",
+    });
+
+    res.render("home_proyectos", mensajes);
   }
 };
