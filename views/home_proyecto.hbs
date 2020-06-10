@@ -1,0 +1,23 @@
+<h1 class="mt-3">Tus proyectos</h1>
+
+{{!-- Mostrar los mensajes en caso de existir --}}
+{{#if mensajes}}
+  {{#each mensajes}}
+    <div class="alert {{type}}" role="alert">
+      {{error}}
+    </div>
+  {{/each}}
+{{/if}}
+
+{{!-- Mostrar los proyectos (si existen) --}}
+{{#if proyectos}}
+    {{#each proyectos}}
+        <div class="card">
+            <h4 class="card-header">{{dataValues.nombre}}</h4>
+            <div class="card-body">
+                <p class="card-text">Esta es la descripción del proyecto</p>
+                <a href="#" class="btn btn-primary">Ver proyecto</a>
+            </div>
+        </div>
+    {{/each}}
+{{/if}}
