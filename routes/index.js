@@ -10,11 +10,11 @@ const proyectosController = require("../controllers/proyectosController");
 module.exports = function () {
   // Documentación sobre los distintos verbos HTTP
   // https://developer.mozilla.org/es/docs/Web/HTTP/Methods
-  routes.get("/", proyectosController.home);
+  routes.get("/", proyectosController.proyectosHome);
 
   routes.post("/nuevo_proyecto", proyectosController.nuevoProyecto);
 
-  routes.get("/home_proyecto", proyectosController.proyectosHome);
+  routes.get("/nuevo_proyecto", proyectosController.formularioNuevoProyecto);
 
   return routes;
 };
