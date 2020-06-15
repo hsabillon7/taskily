@@ -2,7 +2,7 @@
 const Proyecto = require("../models/Proyecto");
 
 // Muestra todos los proyectos del usuario
-exports.home = (req, res, next) => {
+exports.formularioNuevoProyecto = (req, res, next) => {
   res.render("crear_proyecto");
 };
 
@@ -12,13 +12,20 @@ exports.nuevoProyecto = async (req, res, next) => {
   // Validar que el input del formulario tenga valor
   // Para acceder a los valores y asignarlos en un solo paso
   // vamos a utilizar destructuring.
-  const { nombre } = req.body;
+  const { nombre, descripcion } = req.body;
   const mensajes = [];
 
   // Verificar si el nombre del proyecto tiene un valor
   if (!nombre) {
     mensajes.push({
       error: "El nombre del proyecto no puede ser vacío.",
+      type: "alert-danger",
+    });
+  }
+
+  if (!descripcion) {
+    mensajes.push({
+      error: "Debes ingresar una breve descripción del proyecto.",
       type: "alert-danger",
     });
   }
@@ -31,16 +38,14 @@ exports.nuevoProyecto = async (req, res, next) => {
   } else {
     try {
       // Insertar el proyecto a la base de datos
-      await Proyecto.create({ nombre });
+      await Proyecto.create({ nombre, descripcion });
 
       mensajes.push({
         error: "Proyecto almacenado satisfactoriamente.",
         type: "alert-success",
       });
 
-      res.render("crear_proyecto", {
-        mensajes,
-      });
+      res.redirect("/");
     } catch (error) {
       mensajes.push({
         error:
@@ -57,7 +62,6 @@ exports.proyectosHome = async (req, res, next) => {
 
   try {
     const proyectos = await Proyecto.findAll();
-    console.log(proyectos);
 
     res.render("home_proyecto", { proyectos });
   } catch (error) {
@@ -67,6 +71,6 @@ exports.proyectosHome = async (req, res, next) => {
       type: "alert-warning",
     });
 
-    res.render("home_proyectos", mensajes);
+    res.render("home_proyecto", mensajes);
   }
 };
