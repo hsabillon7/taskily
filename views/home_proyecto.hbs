@@ -1,5 +1,6 @@
-<div class="d-flex align-items-center bg-purple rounded">
-  <h1 class="mt-3">Tus proyectos</h1>
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Tus proyectos</h1>
+  <p class="lead">Aquí puedes encontrrar todos los proyectos que has creado</p>
 </div>
 
 {{!-- Mostrar los mensajes en caso de existir --}}
@@ -12,20 +13,24 @@
 {{/if}}
 
 <div class="container">
-{{!-- Mostrar los proyectos (si existen) --}}
-{{#if proyectos}}
-    {{#each proyectos}}
-        <div class="card">
-            <h4 class="card-header">{{dataValues.nombre}}</h4>
-            <div class="card-body">
-                <p class="card-text">{{dataValues.descripcion}}</p>
-                <p class="card-text">{{dataValues.fecha}}</p>
-                <a href="#" class="btn btn-primary">Ver proyecto</a>
+  <div class="card-deck mb-3 text-center">
+    {{!-- Mostrar los proyectos (si existen) --}}
+    {{#if proyectos}}
+        {{#each proyectos}}
+            <div class="card mb-4 shadow-sm">
+              <div class="card-header">
+                <h3 class="font-weight-normal">{{dataValues.nombre}}</h3>
+              </div>
+              <div class="card-body">
+                  <h5 class="card-title">{{dataValues.descripcion}}</h5>
+                  <p class="card-text">{{dataValues.fecha}}</p>
+                  <a href="#" class="btn btn-primary btn-lg">Ver proyecto</a>
+              </div>
             </div>
-        </div>
-    {{/each}}
-{{else}}
-  <h4>Aún no tienes ningún proyecto. ¡Anímate a crear uno!</h4>
-  <a href="/nuevo_proyecto" class="btn btn-primary btn-lg">Crear un proyecto</a>
-{{/if}}
+        {{/each}}
+    {{else}}
+      <h4>Aún no tienes ningún proyecto. ¡Anímate a crear uno!</h4>
+      <a href="/nuevo_proyecto" class="btn btn-primary btn-lg">Crear un proyecto</a>
+    {{/if}}
+  </div>
 </div>
