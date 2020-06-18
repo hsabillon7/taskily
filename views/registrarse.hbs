@@ -1,0 +1,27 @@
+{{!-- Formulario de registro --}}
+
+{{#if error}}
+    <p>{{error}}</p>
+{{/if}}
+<form class="form-signin" action="/registrate" method="POST">
+    <div class="mb-4 text-center">
+        <h1>Regístrate en Taskily</h1>
+        <p>Y comienza a utilizar nuestro aclamado gestor de proyectos</p>
+    </div>
+    <div class="form-label-group">
+        <input type="text" name="fullname" id="fullname" placeholder="John Connor" required autofocus>
+        <label for="fullname">Nombre completo</label>
+    </div>
+    <div class="form-label-group">
+        <input type="email" name="email" id="email" placeholder="jconor@sky.net" required>
+        <label for="email">Correo electrónico</label>
+    </div>
+    <div class="form-label-group">
+        <input type="password" name="password" id="password" required>
+        <label for="password">Contraseña</label>
+    </div>
+    <div class="mb3">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
+        <p class="text-center text-muted mt-5">©2020 Negocios Web - UNICAH</p>
+    </div>
+</form>
