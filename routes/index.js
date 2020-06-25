@@ -12,11 +12,23 @@ const authController = require("../controllers/authController");
 module.exports = function () {
   // Documentación sobre los distintos verbos HTTP
   // https://developer.mozilla.org/es/docs/Web/HTTP/Methods
-  routes.get("/", proyectosController.proyectosHome);
+  routes.get(
+    "/",
+    authController.usuarioAutenticado,
+    proyectosController.proyectosHome
+  );
 
-  routes.post("/nuevo_proyecto", proyectosController.nuevoProyecto);
+  routes.post(
+    "/nuevo_proyecto",
+    authController.usuarioAutenticado,
+    proyectosController.nuevoProyecto
+  );
 
-  routes.get("/nuevo_proyecto", proyectosController.formularioNuevoProyecto);
+  routes.get(
+    "/nuevo_proyecto",
+    authController.usuarioAutenticado,
+    proyectosController.formularioNuevoProyecto
+  );
 
   // Rutas para autenticación
 
@@ -27,6 +39,8 @@ module.exports = function () {
   routes.get("/iniciar_sesion", usuariosController.formularioIniciarSesion);
 
   routes.post("/iniciar_sesion", authController.autenticarUsuario);
+
+  routes.get("/cerrar_sesion", authController.cerrarSesion);
 
   return routes;
 };
