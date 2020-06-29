@@ -68,7 +68,6 @@ app.use(
 
 // Habilitar el uso de connect-flash para compartir mensajes
 // https://github.com/jaredhanson/connect-flash
-// TODO: Verificar el funcionamiento con Express V4+
 app.use(flash());
 
 // Crear una instancia de passport y cargar nuestra estrategia

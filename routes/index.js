@@ -12,6 +12,8 @@ const authController = require("../controllers/authController");
 module.exports = function () {
   // Documentación sobre los distintos verbos HTTP
   // https://developer.mozilla.org/es/docs/Web/HTTP/Methods
+
+  // Rutas para proyectos
   routes.get(
     "/",
     authController.usuarioAutenticado,
@@ -28,6 +30,12 @@ module.exports = function () {
     "/nuevo_proyecto",
     authController.usuarioAutenticado,
     proyectosController.formularioNuevoProyecto
+  );
+
+  routes.get(
+    "/proyecto/:url",
+    authController.usuarioAutenticado,
+    proyectosController.obtenerProyectoPorUrl
   );
 
   // Rutas para autenticación

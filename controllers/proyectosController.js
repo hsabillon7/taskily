@@ -83,3 +83,29 @@ exports.proyectosHome = async (req, res, next) => {
     res.render("home_proyecto", mensajes);
   }
 };
+
+// Busca un proyecto por su URL
+exports.obtenerProyectoPorUrl = async (req, res, next) => {
+  // Obtener el usuario actual
+  const usuario = res.locals.usuario;
+
+  try {
+    // Obtener el proyecto mediante la URL
+    const proyecto = await Proyecto.findOne({
+      where: {
+        url: req.params.url,
+      },
+    });
+
+    // Verificar que el proyecto pertenece al usuario
+    if (proyecto.usuarioId != usuario.id) {
+      res.redirect("/");
+    } else {
+      res.render("ver_proyecto", {
+        proyecto: proyecto.dataValues,
+      });
+    }
+  } catch (error) {
+    res.redirect("/");
+  }
+};
