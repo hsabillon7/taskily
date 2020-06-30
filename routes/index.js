@@ -38,6 +38,12 @@ module.exports = function () {
     proyectosController.obtenerProyectoPorUrl
   );
 
+  routes.post(
+    "/actualizar_proyecto/:id",
+    authController.usuarioAutenticado,
+    proyectosController.actualizarProyecto
+  );
+
   // Rutas para autenticación
 
   routes.get("/registrate", usuariosController.formularioCrearCuenta);

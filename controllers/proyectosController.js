@@ -1,5 +1,8 @@
 // Importar los modelos necesarios
 const Proyecto = require("../models/Proyecto");
+// Importar Moment.js
+const moment = require("moment");
+moment.locale("es");
 
 // Muestra todos los proyectos del usuario
 exports.formularioNuevoProyecto = (req, res, next) => {
@@ -101,11 +104,70 @@ exports.obtenerProyectoPorUrl = async (req, res, next) => {
     if (proyecto.usuarioId != usuario.id) {
       res.redirect("/");
     } else {
+      // Cambiar la visualización de la fecha con Moment.js
+      const hace = moment(proyecto.dataValues.fecha).fromNow();
+
       res.render("ver_proyecto", {
         proyecto: proyecto.dataValues,
+        hace,
       });
     }
   } catch (error) {
+    res.redirect("/");
+  }
+};
+
+// Actualizar los datos de un proyecto
+exports.actualizarProyecto = async (req, res, next) => {
+  // Obtener la información enviada
+  const { nombre, descripcion } = req.body;
+
+  // Obtener la información del usuario actual
+  const usuario = res.locals.usuario;
+
+  const mensajes = [];
+
+  // Verificar si el nombre del proyecto es enviado
+  if (!nombre) {
+    mensajes.push({
+      error: "¡El nombre del proyecto no puede ser vacío!",
+      type: "alert-danger",
+    });
+  }
+
+  // Verificar si la descripción del proyecto es enviada
+  if (!descripcion) {
+    mensajes.push({
+      error: "¡La descripción del proyecto no puede ser vacía!",
+      type: "alert-danger",
+    });
+  }
+
+  // Si hay mensajes
+  if (mensajes.length) {
+    // Enviar valores correctos si la actualización falla
+    const proyecto = await Proyecto.findByPk(req.params.id);
+
+    // Cambiar la visualización de la fecha con Moment.js
+    const hace = moment(proyecto.dataValues.fecha).fromNow();
+
+    res.render("ver_proyecto", {
+      proyecto: proyecto.dataValues,
+      mensajes,
+      hace,
+    });
+  } else {
+    // No existen errores ni mensajes
+    await Proyecto.update(
+      { nombre, descripcion },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+
+    // Redirigir hacia el home de proyectos
     res.redirect("/");
   }
 };
