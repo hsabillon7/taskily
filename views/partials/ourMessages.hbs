@@ -1,0 +1,8 @@
+{{!-- Mostrar los mensajes en caso de existir --}}
+{{#if mensajes}}
+  {{#each mensajes}}
+    <div class="alert {{type}}" role="alert">
+      {{error}}
+    </div>
+  {{/each}}
+{{/if}}
