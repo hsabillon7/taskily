@@ -13,6 +13,9 @@
 {{/if}}
 
 <div class="container">
+  <div class="d-flex flex-row-reverse">
+    <a href="/nuevo_proyecto" class="btn btn-success btn-lg mb-2">Nuevo proyecto</a>
+  </div>
   <div class="card-deck mb-3 text-center">
     {{!-- Mostrar los proyectos (si existen) --}}
     {{#if proyectos}}
@@ -24,7 +27,7 @@
               <div class="card-body">
                   <h5 class="card-title">{{dataValues.descripcion}}</h5>
                   <p class="card-text">{{dataValues.fecha}}</p>
-                  <a href="/proyecto/{{dataValues.url}}" class="btn btn-primary btn-lg">Ver proyecto</a>
+                  <a href="/proyecto/{{dataValues.url}}" class="btn btn-primary btn-lg">Actualizar</a>
               </div>
             </div>
         {{/each}}
