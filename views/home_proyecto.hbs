@@ -28,12 +28,12 @@
                   <h5 class="card-title">{{dataValues.descripcion}}</h5>
                   <p class="card-text">{{dataValues.fecha}}</p>
                   <a href="/proyecto/{{dataValues.url}}" class="btn btn-primary btn-lg">Actualizar</a>
+                  <button name="eliminar-proyecto" data-proyecto-url={{dataValues.url}} type="button" class="btn btn-danger btn-lg">Eliminar</button>
               </div>
             </div>
         {{/each}}
     {{else}}
       <h4>Aún no tienes ningún proyecto. ¡Anímate a crear uno!</h4>
-      <a href="/nuevo_proyecto" class="btn btn-primary btn-lg">Crear un proyecto</a>
     {{/if}}
   </div>
 </div>

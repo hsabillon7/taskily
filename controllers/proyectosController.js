@@ -69,13 +69,19 @@ exports.proyectosHome = async (req, res, next) => {
   const mensajes = [];
 
   try {
-    const proyectos = await Proyecto.findAll({
+    Proyecto.findAll({
       where: {
         usuarioId: usuario.id,
       },
-    });
+    }).then(function (proyectos) {
+      proyectos = proyectos.map(function (proyecto) {
+        proyecto.dataValues.fecha = moment(proyecto.dataValues.fecha).fromNow();
+        return proyecto;
+      });
 
-    res.render("home_proyecto", { proyectos });
+      // Renderizar solo si la promesa se cumple
+      res.render("home_proyecto", { proyectos });
+    });
   } catch (error) {
     // Crear el mensaje de error
     mensajes.push({
@@ -169,5 +175,28 @@ exports.actualizarProyecto = async (req, res, next) => {
 
     // Redirigir hacia el home de proyectos
     res.redirect("/");
+  }
+};
+
+// Eliminar un proyecto
+exports.eliminarProyecto = async (req, res, next) => {
+  // Obtener la URL del proyecto por destructuring query
+  const { url } = req.query;
+
+  // Tratar de eliminar el proyecto
+  try {
+    await Proyecto.destroy({
+      where: {
+        url,
+      },
+    });
+
+    // Si el proyecto se puede eliminar sin problemas
+    // Tipos de respuesta que puede tener un servidor
+    // https://developer.mozilla.org/es/docs/Web/HTTP/Status
+    res.status(200).send("Proyecto eliminado correctamente");
+  } catch (error) {
+    // Si el proyecto no se puede eliminar
+    return next();
   }
 };
