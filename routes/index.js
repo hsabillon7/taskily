@@ -44,6 +44,12 @@ module.exports = function () {
     proyectosController.actualizarProyecto
   );
 
+  routes.delete(
+    "/proyecto/:url",
+    authController.usuarioAutenticado,
+    proyectosController.eliminarProyecto
+  );
+
   // Rutas para autenticación
 
   routes.get("/registrate", usuariosController.formularioCrearCuenta);
