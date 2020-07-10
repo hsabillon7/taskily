@@ -200,3 +200,19 @@ exports.eliminarProyecto = async (req, res, next) => {
     return next();
   }
 };
+
+// Mostrar los datos y tareas del proyecto
+exports.mostrarProyecto = async (req, res, next) => {
+  try {
+    // Obtener el proyecto desde su URL
+    const proyecto = await Proyecto.findOne({
+      where: {
+        url: req.params.url,
+      },
+    });
+
+    res.render("tareas", { proyecto });
+  } catch (error) {
+    res.redirect("/");
+  }
+};
