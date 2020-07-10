@@ -22,12 +22,12 @@
         {{#each proyectos}}
             <div class="card mb-4 shadow-sm">
               <div class="card-header">
-                <h3 class="font-weight-normal">{{dataValues.nombre}}</h3>
+                <a class="font-weight-normal" href="/proyecto/{{dataValues.url}}">{{dataValues.nombre}}</a>
               </div>
               <div class="card-body">
                   <h5 class="card-title">{{dataValues.descripcion}}</h5>
                   <p class="card-text">{{dataValues.fecha}}</p>
-                  <a href="/proyecto/{{dataValues.url}}" class="btn btn-primary btn-lg">Actualizar</a>
+                  <a href="/actualizar_proyecto/{{dataValues.url}}" class="btn btn-primary btn-lg">Actualizar</a>
                   <button name="eliminar-proyecto" data-proyecto-url={{dataValues.url}} type="button" class="btn btn-danger btn-lg">Eliminar</button>
               </div>
             </div>

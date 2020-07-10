@@ -1,0 +1,23 @@
+<h1 class="mt-3">Agrega una tarea</h1>
+
+{{!-- Mostrar los mensajes en caso de existir --}}
+{{>ourMessages}}
+
+<form method="POST" action="/proyecto/{proyecto.url}">
+  <div class="form-group">
+    <label for="nombre">Descripción</label>
+    <input type="text" class="form-control" id="definicion" name="definicion" placeholder="Define la tarea" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Agregar</button>
+</form>
+
+{{!-- Lista de tareas existentes --}}
+{{#if tareas}}
+    <ul>
+    {{#each tareas}}
+        <li>{{tareas.definicion}}</li>
+    </ul>
+    {{/each}}
+{{else}}
+    <p>Este proyecto aún no tiene tareas. ¡Agrega alguna!</p>
+{{/if}}
