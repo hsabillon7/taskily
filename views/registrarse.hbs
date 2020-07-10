@@ -1,27 +1,180 @@
-{{!-- Formulario de registro --}}
+{{!-- Navbar --}}
+<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+    <div class="navbar-translate">
+        <a class="navbar-brand" href="/">
+        Taskily </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/iniciar_sesion">
+            Iniciar sesión
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com" target="_blank" data-original-title="Síguenos en Twitter" rel="nofollow">
+            <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com" target="_blank" data-original-title="Me gusta en Facebook" rel="nofollow">
+            <i class="fa fa-facebook-square"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com" target="_blank" data-original-title="Síguenos en Instagram" rel="nofollow">
+            <i class="fa fa-instagram"></i>
+            </a>
+        </li>
+        </ul>
+    </div>
+    </div>
+</nav>
 
-{{#if error}}
-    <p>{{error}}</p>
-{{/if}}
-<form class="form-signin" action="/registrate" method="POST">
-    <div class="mb-4 text-center">
-        <h1>Regístrate en Taskily</h1>
-        <p>Y comienza a utilizar nuestro aclamado gestor de proyectos</p>
+{{!-- Formulario de inicio de sesión --}}
+<div class="page-header header-filter" filter-color="purple" style="background-image: url('../img/bg1.jpg'); background-size: cover; background-position: top center;">
+    <div class="container">
+        <div class="row">
+            {{#if error}}
+                <div class="alert alert-danger mr-auto ml-auto">
+                    <div class="container">
+                    <div class="alert-icon">
+                        <i class="material-icons">error_outline</i>
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                    </button>
+                    <b>Error:</b> {{error}}
+                    </div>
+                </div>
+            {{/if}}
+          <div class="col-md-10 ml-auto mr-auto">
+          <div class="card card-signup">
+            <h2 class="card-title text-center">Crea tu cuenta Taskily</h2>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-5 ml-auto">
+                  <div class="info info-horizontal" style="padding: 0px 0px 20px;">
+                    <div class="icon icon-rose">
+                      <i class="material-icons">list</i>
+                    </div>
+                    <div class="description">
+                      <h4 class="info-title">Proyectos</h4>
+                      <p class="description">
+                        Taskily te permite trabajar de forma más ordenada y ser más productivo
+                      </p>
+                    </div>
+                  </div>
+                  <div class="info info-horizontal" style="padding: 0px 0px 20px;">
+                    <div class="icon icon-primary">
+                      <i class="material-icons">code</i>
+                    </div>
+                    <div class="description">
+                      <h4 class="info-title">Creado con las mejores tecnologías</h4>
+                      <p class="description">
+                        Implementamos las mejores tecnologías del mercado para brindarte la mejor experiencia
+                      </p>
+                    </div>
+                  </div>
+                  <div class="info info-horizontal" style="padding: 0px 0px 20px;">
+                    <div class="icon icon-info">
+                      <i class="material-icons">group</i>
+                    </div>
+                    <div class="description">
+                      <h4 class="info-title">Comparte tus proyectos</h4>
+                      <p class="description">
+                        Puedes trabajar en equipo para permanecer organizados y apoyándose
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5 mr-auto">
+                  <div class="social text-center">
+                    <button class="btn btn-just-icon btn-round btn-twitter">
+                      <i class="fa fa-twitter"></i>
+                    </button>
+                    <button class="btn btn-just-icon btn-round btn-dribbble">
+                      <i class="fa fa-dribbble"></i>
+                    </button>
+                    <button class="btn btn-just-icon btn-round btn-facebook">
+                      <i class="fa fa-facebook"> </i>
+                    </button>
+                    <h4> o crea tus credenciales Taskily </h4>
+                  </div>
+                  <form class="form" method="POST" action="/registrate">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">face</i>
+                          </span>
+                        </div>
+                        <input class="form-control" type="text" name="fullname" id="fullname" placeholder="John Connor" required autofocus>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">mail</i>
+                          </span>
+                        </div>
+                        <input class="form-control" type="email" name="email" id="email" placeholder="jconor@sky.net" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">lock_outline</i>
+                          </span>
+                        </div>
+                        <input class="form-control" type="password" name="password" id="password" placeholder="Contraseña" required>
+                      </div>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                        Acepto los <a href="#something">términos y condiciones</a>.
+                      </label>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary btn-round" type="submit">Registrarse</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>  
+        </div>
     </div>
-    <div class="form-label-group">
-        <input type="text" name="fullname" id="fullname" placeholder="John Connor" required autofocus>
-        <label for="fullname">Nombre completo</label>
-    </div>
-    <div class="form-label-group">
-        <input type="email" name="email" id="email" placeholder="jconor@sky.net" required>
-        <label for="email">Correo electrónico</label>
-    </div>
-    <div class="form-label-group">
-        <input type="password" name="password" id="password" required>
-        <label for="password">Contraseña</label>
-    </div>
-    <div class="mb3">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
-        <p class="text-center text-muted mt-5">©2020 Negocios Web - UNICAH</p>
-    </div>
-</form>
+    <footer class="footer">
+        <div class="container">
+            <nav class="float-left">
+                <ul>
+                    <li><a href="#">Taskily</a></li>
+                    <li><a href="#">Sobre nosotros</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Política de privacidad</a></li>
+                </ul>
+            </nav>
+            <div class="copyright float-right">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>, Negocios Web - UNICAH JS
+            </div>
+        </div>        
+    </footer>
+</div>

@@ -1,21 +1,109 @@
+{{!-- Navbar --}}
+<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+    <div class="navbar-translate">
+        <a class="navbar-brand" href="/">
+        Taskily </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/registrate">
+            Registrarse
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com" target="_blank" data-original-title="Síguenos en Twitter" rel="nofollow">
+            <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com" target="_blank" data-original-title="Me gusta en Facebook" rel="nofollow">
+            <i class="fa fa-facebook-square"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com" target="_blank" data-original-title="Síguenos en Instagram" rel="nofollow">
+            <i class="fa fa-instagram"></i>
+            </a>
+        </li>
+        </ul>
+    </div>
+    </div>
+</nav>
+
 {{!-- Formulario de inicio de sesión --}}
-<form class="form-signin" action="" method="POST">
-    {{!-- Alertas --}}
-    {{>messages}}
-    <div class="mb-4 text-center">
-        <h1>Iniciar sesión en Taskily</h1>
-        <p>Bienvenido al mejor gestor de proyectos en la web</p>
+<div class="page-header header-filter" style="background-image: url(../img/bg1.jpg); background-size: cover; background-position: top center;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+                {{!-- Alertas --}}
+                {{>messages}}
+                <div class="card card-login">
+                    <form class="form" action="" method="POST">
+                        <div class="card-header card-header-primary text-center">
+                            <h4>Iniciar sesión</h4>
+                            <div class="social-line">
+                                <a href="#" class="btn btn-just-icon btn-link">
+                                    <i class="fa fa-facebook-square"></i>
+                                </a>
+                                <a href="#" class="btn btn-just-icon btn-link">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                                <a href="#" class="btn btn-just-icon btn-link">
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="description text-center">o con tus credenciales</p>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="material-icons">mail</i>
+                                    </span>
+                                </div>
+                                <input class="form-control" type="email" name="email" id="email" placeholder="jconor@sky.net" required>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="material-icons">lock_outline</i>
+                                    </span>
+                                </div>
+                                <input class="form-control" type="password" name="password" id="password" placeholder="Contraseña" required>
+                            </div>
+                        </div>
+                        <div class="footer text-center">
+                            <button class="btn btn-primary btn-link btn-wd btn-lg" type="submit">Iniciar sesión</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-label-group">
-        <label for="email">Correo electrónico</label>
-        <input type="email" name="email" id="email" placeholder="jconor@sky.net" required>
-    </div>
-    <div class="form-label-group">
-        <label for="password">Contraseña</label>
-        <input type="password" name="password" id="password" placeholder="contraseña" required>
-    </div>
-    <div class="mb3">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
-        <p class="text-center text-muted mt-5">©2020 Negocios Web - UNICAH</p>
-    </div>
-</form>
+    <footer class="footer">
+        <div class="container">
+            <nav class="float-left">
+                <ul>
+                    <li><a href="#">Taskily</a></li>
+                    <li><a href="#">Sobre nosotros</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Política de privacidad</a></li>
+                </ul>
+            </nav>
+            <div class="copyright float-right">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>, Negocios Web - UNICAH JS
+            </div>
+        </div>        
+    </footer>
+</div>
