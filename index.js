@@ -22,6 +22,7 @@ const db = require("./config/db");
 // Importar los modelos
 require("./models/Proyecto");
 require("./models/Usuario");
+require("./models/Tarea");
 
 // Realizar la conexión a la base de datos
 // Sequelize se conecta mediante promises
