@@ -6,6 +6,7 @@ const routes = express.Router();
 const proyectosController = require("../controllers/proyectosController");
 const usuariosController = require("../controllers/usuariosController");
 const authController = require("../controllers/authController");
+const tareasController = require("../controllers/tareasController");
 
 // Construir las rutas disponibles para el servidor
 // Las rutas deben exportarse para poder ser utilizadas en otros archivos
@@ -33,7 +34,7 @@ module.exports = function () {
   );
 
   routes.get(
-    "/proyecto/:url",
+    "/actualizar_proyecto/:url",
     authController.usuarioAutenticado,
     proyectosController.obtenerProyectoPorUrl
   );
@@ -50,8 +51,13 @@ module.exports = function () {
     proyectosController.eliminarProyecto
   );
 
-  // Rutas para autenticación
+  routes.get(
+    "/proyecto/:url",
+    authController.usuarioAutenticado,
+    proyectosController.mostrarProyecto
+  );
 
+  // Rutas para autenticación
   routes.get("/registrate", usuariosController.formularioCrearCuenta);
 
   routes.post("/registrate", usuariosController.crearCuenta);
@@ -61,6 +67,13 @@ module.exports = function () {
   routes.post("/iniciar_sesion", authController.autenticarUsuario);
 
   routes.get("/cerrar_sesion", authController.cerrarSesion);
+
+  // Rutas para tareas
+  routes.post(
+    "/proyecto/:url",
+    authController.usuarioAutenticado,
+    tareasController.agregarTarea
+  );
 
   return routes;
 };
