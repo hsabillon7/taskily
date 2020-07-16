@@ -15,6 +15,8 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 // Importar connect-flash para disponer de los errores en todo el sitio
 const flash = require("connect-flash");
+// Importar helpers con funciones comunes para todo el sitio
+const helpers = require("./helpers");
 
 // Crear la conexión con la base de datos
 const db = require("./config/db");
@@ -80,6 +82,8 @@ app.use((req, res, next) => {
   // Pasar el usuario a las variables locales de la petición
   res.locals.usuario = { ...req.user } || null;
   res.locals.messages = req.flash();
+  // Pasar valores de variables por el helper
+  res.locals.vardump = helpers.vardump;
   // Continuar con el camino del middleware
   next();
 });

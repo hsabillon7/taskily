@@ -75,5 +75,17 @@ module.exports = function () {
     tareasController.agregarTarea
   );
 
+  routes.patch(
+    "/tarea/:id",
+    authController.usuarioAutenticado,
+    tareasController.actualizarEstadoTarea
+  );
+
+  routes.delete(
+    "/tarea/:id",
+    authController.usuarioAutenticado,
+    tareasController.eliminarTarea
+  );
+
   return routes;
 };

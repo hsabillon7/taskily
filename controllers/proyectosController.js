@@ -1,5 +1,6 @@
 // Importar los modelos necesarios
 const Proyecto = require("../models/Proyecto");
+const Tareas = require("../models/Tarea");
 // Importar Moment.js
 const moment = require("moment");
 moment.locale("es");
@@ -211,7 +212,30 @@ exports.mostrarProyecto = async (req, res, next) => {
       },
     });
 
-    res.render("tareas", { proyecto });
+    // Buscar las tareas del proyecto
+    const tareas = await Tareas.findAll({
+      where: {
+        proyectoId: proyecto.id,
+      },
+    });
+
+    // Convertir el objeto del modelo en un arreglo más sencillo
+    // de recorrer en la vista mediante HBS
+    const tareasArray = [];
+
+    tareas.map((tarea) => {
+      tareasArray.push({
+        id: tarea.dataValues.id,
+        definicion: tarea.dataValues.definicion,
+        estado: tarea.dataValues.estado,
+        fecha: tarea.dataValues.fecha,
+      });
+    });
+
+    res.render("tareas", {
+      proyecto: proyecto.dataValues,
+      tareas: tareasArray,
+    });
   } catch (error) {
     res.redirect("/");
   }

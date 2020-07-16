@@ -1,9 +1,12 @@
-<h1 class="mt-3">Agrega una tarea</h1>
+<h1>{{proyecto.nombre}}</h1>
+<p>{{proyecto.descripcion}}</p>
+
+<h3 class="mt-3">Agrega una tarea</h3>
 
 {{!-- Mostrar los mensajes en caso de existir --}}
 {{>ourMessages}}
 
-<form method="POST" action="/proyecto/{proyecto.url}">
+<form method="POST" action="/proyecto/{{proyecto.url}}">
   <div class="form-group">
     <label for="nombre">Descripción</label>
     <input type="text" class="form-control" id="definicion" name="definicion" placeholder="Define la tarea" required>
@@ -13,11 +16,30 @@
 
 {{!-- Lista de tareas existentes --}}
 {{#if tareas}}
-    <ul>
+    <ul id="listado-tareas">
     {{#each tareas}}
-        <li>{{tareas.definicion}}</li>
-    </ul>
+          <li data-tarea={{id}}>
+            <p>
+              {{definicion}}
+              <div class="togglebutton">
+                <label>
+                  {{#if estado}}
+                    <input type="checkbox" checked>
+                  {{else}}
+                    <input type="checkbox">
+                  {{/if}}
+                  <span class="toggle"></span>
+                </label>
+              </div>
+              <button class="btn btn-fab btn-round btn-primary">
+                <i class="fa fa-trash"></i>
+              </button>
+            </p>
+          </li>
     {{/each}}
+    </ul>
 {{else}}
-    <p>Este proyecto aún no tiene tareas. ¡Agrega alguna!</p>
+    <div class="text-center mt-3">
+      <h4>Este proyecto aún no tiene tareas. ¡Agrega alguna!</h4>
+    </div>
 {{/if}}
