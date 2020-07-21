@@ -87,5 +87,13 @@ module.exports = function () {
     tareasController.eliminarTarea
   );
 
+  // Reestablecer la contraseña de un usuario
+  routes.get(
+    "/reestablecer_password",
+    usuariosController.formularioReestablecerPassword
+  );
+
+  routes.post("/reestablecer_password", authController.enviarToken);
+
   return routes;
 };

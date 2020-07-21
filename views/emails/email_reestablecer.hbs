@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @media screen and (max-width: 720px) {
+            body {
+                width: 100% !important;
+                max-width: 720px !important;
+                background-color: #eee;
+            }
+        }
+    </style>
+    <title>Reestablece tu contraseña de taskily</title>
+</head>
+<body>
+    <h2>Reestablece tu contraseña</h2>
+    <p>¡Hola {{fullname}}! Has solicitado reestablecer tu contraseña, haz clic en el botón inferior para reestablecer tu contraseña.</p>
+    <p>Este enlace es temporal, así que si se vence, vuelve a solitarlo.</p>
+
+    <a href="{{resetUrl}}">Reestablece tu contraseña</a>
+
+    <p>Si no puedes acceder al enlace, copiar el siguiente enlace una pestaña del navegador: {{resetUrl}}</p>
+    <p>Si no solicitaste reestablecer tu contraseña, puedes ignorar este correo.</p>
+</body>
+</html>
