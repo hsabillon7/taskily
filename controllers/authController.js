@@ -36,7 +36,7 @@ exports.usuarioAutenticado = (req, res, next) => {
   return res.redirect("/iniciar_sesion");
 };
 
-// Genera un token que le permite al usuario reestablecer la contraseña
+// Genera un token que le permite al usuario restablecer la contraseña
 // mediante un enlace
 exports.enviarToken = async (req, res, next) => {
   // Verificar si existe el usuario
@@ -50,7 +50,7 @@ exports.enviarToken = async (req, res, next) => {
   // Si el usuario no existe
   if (!usuario) {
     req.flash("error", "¡Este usuario no está registrado en Taskily!");
-    res.redirect("/reestablecer_password");
+    res.redirect("/restablecer_password");
   }
 
   // Si el usuario existe
@@ -62,17 +62,17 @@ exports.enviarToken = async (req, res, next) => {
   await usuario.save();
 
   // URL de reestablecer contraseña
-  const resetUrl = `http://${req.headers.host}/reestablecerPassword/${usuario.token}`;
+  const resetUrl = `http://${req.headers.host}/restablecerPassword/${usuario.token}`;
 
   // Enviar el correo electrónico al usuario con el link que contiene
   // el token generado
   await enviarCorreo.enviarCorreo({
     usuario,
-    subject: "Reestablece tu contraseña de Taskily",
+    subject: "Restablece tu contraseña de Taskily",
     resetUrl,
-    vista: "email_reestablecer",
+    vista: "email_restablecer",
     text:
-      "Has solicitado reestablecer tu contraseña de Taskily! Autoriza el contenido HTML.",
+      "Has solicitado restablecer tu contraseña de Taskily! Autoriza el contenido HTML.",
   });
 
   // Redireccionar al usuario al inicio de sesión

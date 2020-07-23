@@ -89,11 +89,11 @@ module.exports = function () {
 
   // Reestablecer la contraseña de un usuario
   routes.get(
-    "/reestablecer_password",
-    usuariosController.formularioReestablecerPassword
+    "/restablecer_password",
+    usuariosController.formularioRestablecerPassword
   );
 
-  routes.post("/reestablecer_password", authController.enviarToken);
+  routes.post("/restablecer_password", authController.enviarToken);
 
   return routes;
 };
