@@ -2,6 +2,10 @@
 const express = require("express");
 const routes = express.Router();
 
+// Importar expresss-validator
+// https://express-validator.github.io/docs/sanitization.html
+const { body } = require("express-validator/check");
+
 // Importar los controladores
 const proyectosController = require("../controllers/proyectosController");
 const usuariosController = require("../controllers/usuariosController");
@@ -24,6 +28,9 @@ module.exports = function () {
   routes.post(
     "/nuevo_proyecto",
     authController.usuarioAutenticado,
+    // Sanitizar el contenido del formulario
+    body("nombre").notEmpty().trim().escape(),
+    body("descripcion").notEmpty().trim().escape(),
     proyectosController.nuevoProyecto
   );
 
@@ -42,6 +49,9 @@ module.exports = function () {
   routes.post(
     "/actualizar_proyecto/:id",
     authController.usuarioAutenticado,
+    // Sanitizar el contenido del formulario
+    body("nombre").notEmpty().trim().escape(),
+    body("descripcion").notEmpty().trim().escape(),
     proyectosController.actualizarProyecto
   );
 
@@ -94,6 +104,10 @@ module.exports = function () {
   );
 
   routes.post("/restablecer_password", authController.enviarToken);
+
+  routes.get("/resetear_password/:token", authController.validarToken);
+
+  routes.post("/resetear_password/:token", authController.actualizarPassword);
 
   return routes;
 };

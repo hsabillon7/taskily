@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 // Importar la configuración de Mailtrap.io
 const mailTrapConfig = require("../config/email");
 // Importar Handlebars
-const hbs = require("express-handlebars");
+const handlebars = require("handlebars");
 const fs = require("fs");
 const path = require("path");
 
@@ -22,36 +22,33 @@ exports.enviarCorreo = async (opciones) => {
     },
   });
 
-  const send = await transporter.sendMail({
-    from: "Taskily <noreply@taskily.com>", // sender address
-    to: opciones.usuario.email, // list of receivers
-    subject: opciones.subject, // Subject line
-    text: opciones.text, // plain text body
-    html,
-  });
-
   // Obtener y construir el template del correo electrónico
   fs.readFile(
-    path.resolve(__dirname, "../views/emails/email_reestablecer.hbs"),
+    path.resolve(__dirname, "../views/emails/email_restablecer.hbs"),
     "utf8",
-    function async(error, source) {
+    async function (error, source) {
       if (error) {
         console.log("No se puede cargar el template de correo");
         throw error;
       }
 
       // Generar un HTML para el cuerpo del correo electrónico
-      // TODO: crear el archivo HTML
       const data = {
         fullname: opciones.usuario.fullname,
         resetUrl: opciones.resetUrl,
       };
 
-      const template = hbs.compile(source.toString());
+      const template = handlebars.compile(source.toString());
       const html = template(data);
 
       // Enviar el correo electrónico
-      send();
+      const info = await transporter.sendMail({
+        from: "Taskily <noreply@taskily.com>", // sender address
+        to: opciones.usuario.email, // list of receivers
+        subject: opciones.subject, // Subject line
+        text: opciones.text, // plain text body
+        html,
+      });
     }
   );
 };
