@@ -4,6 +4,9 @@ const Tareas = require("../models/Tarea");
 // Importar Moment.js
 const moment = require("moment");
 moment.locale("es");
+// Importar Sequelize y los operadores de búsqueda
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 // Muestra todos los proyectos del usuario
 exports.formularioNuevoProyecto = (req, res, next) => {
@@ -237,6 +240,34 @@ exports.mostrarProyecto = async (req, res, next) => {
       tareas: tareasArray,
     });
   } catch (error) {
+    res.redirect("/");
+  }
+};
+
+// Retornar los proyectos según el comodín de búsqueda
+exports.buscarProyecto = async (req, res, next) => {
+  // Obtener todos los proyectos que cumplan con la condición
+  try {
+    const { search } = req.body;
+
+    // Op.like no distingue mayúsculas de minúsculas
+    await Proyecto.findAll({
+      where: {
+        nombre: {
+          [Op.like]: `%${search}%`,
+        },
+      },
+    }).then(function (proyectos) {
+      proyectos = proyectos.map(function (proyecto) {
+        proyecto.dataValues.fecha = moment(proyecto.dataValues.fecha).fromNow();
+        return proyecto;
+      });
+
+      // Renderizar solo si la promesa se cumple
+      res.render("resultados", { proyectos, search });
+    });
+  } catch (error) {
+    console.log(error);
     res.redirect("/");
   }
 };

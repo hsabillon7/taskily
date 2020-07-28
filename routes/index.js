@@ -4,7 +4,7 @@ const routes = express.Router();
 
 // Importar expresss-validator
 // https://express-validator.github.io/docs/sanitization.html
-const { body } = require("express-validator/check");
+const { body } = require("express-validator");
 
 // Importar los controladores
 const proyectosController = require("../controllers/proyectosController");
@@ -67,20 +67,42 @@ module.exports = function () {
     proyectosController.mostrarProyecto
   );
 
+  routes.post(
+    "/buscar_proyectos",
+    authController.usuarioAutenticado,
+    // Sanitizar el contenido del formulario
+    body("search").notEmpty().trim().escape(),
+    proyectosController.buscarProyecto
+  );
+
   // Rutas para autenticación
   routes.get("/registrate", usuariosController.formularioCrearCuenta);
 
-  routes.post("/registrate", usuariosController.crearCuenta);
+  routes.post(
+    "/registrate",
+    // Sanitizar el contenido del formulario
+    body("fullname").notEmpty().trim().escape(),
+    usuariosController.crearCuenta
+  );
 
   routes.get("/iniciar_sesion", usuariosController.formularioIniciarSesion);
 
-  routes.post("/iniciar_sesion", authController.autenticarUsuario);
+  routes.post(
+    "/iniciar_sesion",
+    // Sanitizar el contenido del formulario
+    body("email").notEmpty().trim(),
+    body("password").notEmpty().trim(),
+    authController.autenticarUsuario
+  );
 
   routes.get("/cerrar_sesion", authController.cerrarSesion);
 
   // Rutas para tareas
   routes.post(
     "/proyecto/:url",
+    // Sanitizar el contenido del formulario
+    // TODO: revisar el envío de contenido vacío
+    body("definicion").trim().notEmpty().escape(),
     authController.usuarioAutenticado,
     tareasController.agregarTarea
   );
@@ -107,7 +129,12 @@ module.exports = function () {
 
   routes.get("/resetear_password/:token", authController.validarToken);
 
-  routes.post("/resetear_password/:token", authController.actualizarPassword);
+  routes.post(
+    "/resetear_password/:token",
+    // Sanitizar el contenido del formulario
+    body("password").notEmpty().trim(),
+    authController.actualizarPassword
+  );
 
   return routes;
 };

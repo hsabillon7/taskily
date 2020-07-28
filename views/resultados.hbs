@@ -1,0 +1,36 @@
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Resultados de tu búsqueda</h1>
+  <p class="lead">Buscaste proyectos que contengan <strong>{{search}}</strong></p>
+</div>
+
+{{!-- Mostrar los mensajes en caso de existir --}}
+{{#if mensajes}}
+  {{#each mensajes}}
+    <div class="alert {{type}}" role="alert">
+      {{error}}
+    </div>
+  {{/each}}
+{{/if}}
+
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    {{!-- Mostrar los proyectos (si existen) --}}
+    {{#if proyectos}}
+        {{#each proyectos}}
+            <div class="card mb-4 shadow-sm">
+              <div class="card-header">
+                <a class="font-weight-normal" href="/proyecto/{{dataValues.url}}">{{dataValues.nombre}}</a>
+              </div>
+              <div class="card-body">
+                  <h5 class="card-title">{{dataValues.descripcion}}</h5>
+                  <p class="card-text">{{dataValues.fecha}}</p>
+                  <a href="/actualizar_proyecto/{{dataValues.url}}" class="btn btn-primary btn-lg">Actualizar</a>
+                  <button name="eliminar-proyecto" data-proyecto-url={{dataValues.url}} type="button" class="btn btn-danger btn-lg">Eliminar</button>
+              </div>
+            </div>
+        {{/each}}
+    {{else}}
+      <h4 class="text-center">¡No se han encontrado proyectos que coincidan con tu búsqueda!</h4>
+    {{/if}}
+  </div>
+</div>
