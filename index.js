@@ -91,7 +91,11 @@ app.use((req, res, next) => {
 // Indicarle a express dónde están las rutas del servidor
 app.use("/", routes());
 
+// Permitir que Heroku nos asigne un puerto
+const host = "0.0.0.0";
+const port = process.env.PORT;
+
 // Inicializar el servidor en un puerto en específico
-app.listen(7000, () => {
+app.listen(port, host, () => {
   console.log("Servidor ejecutandose en el puerto 7000");
 });
