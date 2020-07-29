@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./index.js",
-    "start": "concurrently \"npm run dev\" \"npm run watch\"",
-    "watch": "webpack --w --mode development"
+    "develop": "concurrently \"npm run dev\" \"npm run watch\"",
+    "watch": "webpack --w --mode development",
+    "start": "node ./index.js"
   },
   "repository": {
     "type": "git",
@@ -52,5 +53,8 @@
     "nodemon": "^2.0.4",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
+  },
+  "engines": {
+    "node": "12.18.3"
   }
 }
